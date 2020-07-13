@@ -8,9 +8,15 @@ inputs:
   token:
     description: 'GitHub token that has access to write to GitHub package registry. You can use GITHUB_TOKEN for this.'
     required: true
+  user:
+    description: 'GitHub user that has access to commit to repository.'
+    required: true
+  email:
+    description: 'GitHub email that has access to commit to repository.'
+    required: true
   owner:
     description: 'Name of the user or organization account that owns the repository containing your project.'
-    required: true
+    required: false
   working-directory:
     description: 'An optional path to switch to before building the Gem.'
     required: false
@@ -19,5 +25,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.token }}
+    - ${{ inputs.user }}
+    - ${{ inputs.email }}
     - ${{ inputs.owner }}
     - ${{ inputs.working-directory }}

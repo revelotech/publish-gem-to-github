@@ -10,9 +10,14 @@ WORKING_DIRECTORY=$5
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
 [ -z "${GITHUB_EMAIL}" ] && { echo "Missing input.email!"; exit 2; }
 
+echo "Installing gem-release"
+gem install gem-release
+
+echo "Setting gitub user"
+git config --global user.name ${GITHUB_USER}
+git config --global user.email ${GITHUB_EMAIL}
+
 echo "Bumping and pushing tags"
-git config --global user.name ${{ secrets.DEFAULT_USER }}
-git config --global user.email ${{ secrets.DEFAULT_EMAIL }}
 gem bump
 gem tag
 git push origin master --force-with-lease
