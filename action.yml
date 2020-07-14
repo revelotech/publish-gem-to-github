@@ -20,6 +20,9 @@ inputs:
   working-directory:
     description: 'An optional path to switch to before building the Gem.'
     required: false
+  branch:
+    description: 'An optional branch to push version bump.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -29,3 +32,4 @@ runs:
     - ${{ inputs.email }}
     - ${{ inputs.owner }}
     - ${{ inputs.working-directory }}
+    - ${{ inputs.branch }}

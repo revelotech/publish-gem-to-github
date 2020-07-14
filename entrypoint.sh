@@ -5,6 +5,7 @@ GITHUB_USER=$2
 GITHUB_EMAIL=$3
 OWNER=$4
 WORKING_DIRECTORY=$5
+BRANCH=$6
 
 [ -z "${GITHUB_TOKEN}" ] && { echo "Missing input.token!"; exit 2; }
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
@@ -20,7 +21,7 @@ git config --global user.email ${GITHUB_EMAIL}
 echo "Bumping and pushing tags"
 gem bump
 gem tag
-git push origin master --force-with-lease
+git push origin ${BRANCH:-master} --force-with-lease
 git push --tags
 
 echo "Setting up access to GitHub Package Registry"
