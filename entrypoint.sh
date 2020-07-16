@@ -6,23 +6,29 @@ GITHUB_EMAIL=$3
 OWNER=$4
 WORKING_DIRECTORY=$5
 BRANCH=$6
+SKIP_TAG=$7
 
 [ -z "${GITHUB_TOKEN}" ] && { echo "Missing input.token!"; exit 2; }
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
 [ -z "${GITHUB_EMAIL}" ] && { echo "Missing input.email!"; exit 2; }
 
-echo "Installing gem-release"
-gem install gem-release
+if [ -z "${SKIP_TAG}" ]
+then
+  echo "Installing gem-release"
+  gem install gem-release
 
-echo "Setting gitub user"
-git config --global user.name ${GITHUB_USER}
-git config --global user.email ${GITHUB_EMAIL}
+  echo "Setting gitub user"
+  git config --global user.name ${GITHUB_USER}
+  git config --global user.email ${GITHUB_EMAIL}
 
-echo "Bumping and pushing tags"
-gem bump
-gem tag
-git push origin ${BRANCH:-master} --force-with-lease
-git push --tags
+  echo "Bumping and pushing tags"
+  gem bump
+  gem tag
+  git push origin ${BRANCH:-master} --force-with-lease
+  git push --tags
+else
+    echo "Skipping Bumping and pushing tags"
+fi
 
 echo "Setting up access to GitHub Package Registry"
 mkdir -p ~/.gem
