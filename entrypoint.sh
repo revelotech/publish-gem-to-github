@@ -24,10 +24,10 @@ then
   echo "Bumping and pushing tags"
   gem bump
   gem tag
-  git push origin ${BRANCH:-master} --force-with-lease
+  git push origin ${BRANCH:-master}
   git push --tags
 else
-    echo "Skipping Bumping and pushing tags"
+  echo "Skipping Bumping and pushing tags"
 fi
 
 echo "Setting up access to GitHub Package Registry"
