@@ -22,7 +22,7 @@ then
   git config --global user.email ${GITHUB_EMAIL}
 
   echo "Bumping and pushing tags"
-  version_pattern=$([[ -f "${BRANCH}" ]] && printf "patch" || printf "pre")
+  version_pattern=$([[ -z "${BRANCH}" ]] && printf "patch" || printf "pre")
   gem bump -v $version_pattern
 
   gem tag
