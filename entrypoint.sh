@@ -23,7 +23,7 @@ then
 
   echo "Bumping and pushing tags"
   version_pattern=$([[ -f "${BRANCH}" ]] && printf "patch" || printf "pre")
-  gem bump -v version_pattern
+  gem bump -v $version_pattern
 
   gem tag
   git push origin ${BRANCH:-master}
