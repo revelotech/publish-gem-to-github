@@ -26,7 +26,10 @@ then
   gem bump -v $version_pattern
 
   gem tag
+
   git push origin ${BRANCH:-master}
+  echo "Pushing code to branch ${BRANCH:-master}"
+
   git push --tags
 else
   echo "Skipping Bumping and pushing tags"
