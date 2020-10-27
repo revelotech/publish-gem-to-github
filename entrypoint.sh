@@ -12,6 +12,12 @@ SKIP_TAG=$7
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
 [ -z "${GITHUB_EMAIL}" ] && { echo "Missing input.email!"; exit 2; }
 
+echo "Setting up access to GitHub Package Registry"
+mkdir -p ~/.gem
+touch ~/.gem/credentials
+chmod 600 ~/.gem/credentials
+echo ":github: Bearer ${GITHUB_TOKEN}" >> ~/.gem/credentials
+
 if [ -z "${SKIP_TAG}" ]
 then
   echo "Installing gem-release"
@@ -34,12 +40,6 @@ then
 else
   echo "Skipping Bumping and pushing tags"
 fi
-
-echo "Setting up access to GitHub Package Registry"
-mkdir -p ~/.gem
-touch ~/.gem/credentials
-chmod 600 ~/.gem/credentials
-echo ":github: Bearer ${GITHUB_TOKEN}" >> ~/.gem/credentials
 
 echo "Building the gem"
 gem build ${WORKING_DIRECTORY:-.}/*.gemspec
