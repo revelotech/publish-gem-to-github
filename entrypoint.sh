@@ -7,6 +7,7 @@ OWNER=$4
 WORKING_DIRECTORY=$5
 BRANCH=$6
 SKIP_TAG=$7
+DEFAULT_BRANCH=$8
 
 [ -z "${GITHUB_TOKEN}" ] && { echo "Missing input.token!"; exit 2; }
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
@@ -33,8 +34,8 @@ then
 
   gem tag
 
-  git push origin ${BRANCH:-master}
-  echo "Pushing code to branch ${BRANCH:-master}"
+  git push origin ${BRANCH:-$DEFAULT_BRANCH}
+  echo "Pushing code to branch ${BRANCH:-$DEFAULT_BRANCH}"
 
   git push --tags
 else

@@ -26,6 +26,11 @@ inputs:
   skip_tag:
     description: 'Skip Bumping and pushing tags step.'
     required: false
+  default_branch:
+    description: 'the default branch to push gem tags ex. master|main'
+    required: false
+    default: master
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -37,3 +42,4 @@ runs:
     - ${{ inputs.working-directory }}
     - ${{ inputs.branch }}
     - ${{ inputs.skip_tag }}
+    - ${{ inputs.default_branch }}
