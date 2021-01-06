@@ -28,8 +28,6 @@ then
   git config --global user.name ${GITHUB_USER}
   git config --global user.email ${GITHUB_EMAIL}
   
-  echo `git config --global --list`
-  
   git pull origin ${BRANCH:-$DEFAULT_BRANCH}
 
   echo "Bumping and pushing tags"
