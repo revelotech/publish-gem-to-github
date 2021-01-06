@@ -27,6 +27,8 @@ then
   echo "Setting gitub user"
   git config --global user.name ${GITHUB_USER}
   git config --global user.email ${GITHUB_EMAIL}
+  
+  git pull origin ${BRANCH:-$DEFAULT_BRANCH}
 
   echo "Bumping and pushing tags"
   version_pattern=$([[ -z "${BRANCH}" ]] && printf "patch" || printf "pre")
