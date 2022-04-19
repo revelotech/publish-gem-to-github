@@ -13,6 +13,10 @@ DEFAULT_BRANCH=$8
 [ -z "${GITHUB_USER}" ] && { echo "Missing input.user!"; exit 2; }
 [ -z "${GITHUB_EMAIL}" ] && { echo "Missing input.email!"; exit 2; }
 
+
+echo "Setting safe workspace directory"
+git config --global --add safe.directory /github/workspace
+
 echo "Setting up access to GitHub Package Registry"
 mkdir -p ~/.gem
 touch ~/.gem/credentials
@@ -43,9 +47,6 @@ then
 else
   echo "Skipping Bumping and pushing tags"
 fi
-
-echo "Setting safe workspace directory"
-git config --global --add safe.directory ${WORKING_DIRECTORY:-.}
 
 echo "Building the gem"
 gem build ${WORKING_DIRECTORY:-.}/*.gemspec
