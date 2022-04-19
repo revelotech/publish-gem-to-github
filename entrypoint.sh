@@ -27,7 +27,7 @@ then
   echo "Setting gitub user"
   git config --global user.name ${GITHUB_USER}
   git config --global user.email ${GITHUB_EMAIL}
-  
+
   git pull origin ${BRANCH:-$DEFAULT_BRANCH}
 
   echo "Bumping and pushing tags"
@@ -43,6 +43,9 @@ then
 else
   echo "Skipping Bumping and pushing tags"
 fi
+
+echo "Setting safe workspace directory"
+git config --global --add safe.directory ${WORKING_DIRECTORY:-.}
 
 echo "Building the gem"
 gem build ${WORKING_DIRECTORY:-.}/*.gemspec
