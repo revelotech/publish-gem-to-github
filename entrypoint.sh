@@ -51,4 +51,4 @@ fi
 echo "Building the gem"
 gem build ${WORKING_DIRECTORY:-.}/*.gemspec
 echo "Pushing the built gem to GitHub Package Registry"
-gem push --key github --host "https://rubygems.pkg.github.com/${OWNER:-contratadome}" ./*.gem
+gem push --key github --host "https://rubygems.pkg.github.com/${OWNER:-revelotech}" ./*.gem
